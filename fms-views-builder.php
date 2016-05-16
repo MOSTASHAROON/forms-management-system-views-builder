@@ -6,13 +6,13 @@ if ( ! defined( 'ABSPATH' ) ) {
   Plugin Name: Forms Management System Views Builder
   Plugin URI: http://mostasharoon.org
   Description: An easy way to display the custom fields at the frontend.
-  Version: 1.1.1
+  Version: 1.1.2
   Author: Mohammed Thaer
   Author URI: http://mostasharoon.org
   Text Domain: fvb
  */
 
-define( 'FVB_VERSION', '1.1.1' );
+define( 'FVB_VERSION', '1.1.2' );
 
 /* ----------------------------------------------------------------------------------- */
 /* 	Includes required files.

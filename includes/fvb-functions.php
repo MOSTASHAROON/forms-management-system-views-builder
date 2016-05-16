@@ -71,3 +71,48 @@ function FVB_CanAccess( $view_settings ) {
 
 	return $canAccess;
 }
+
+function fvb_after_common_fields( $field_id, $label, $values ) {
+	$tpl               = '%s[%d][%s]';
+	$html_before_name  = sprintf( $tpl, 'fms_input', $field_id, 'html_before' );
+	$html_after_name   = sprintf( $tpl, 'fms_input', $field_id, 'html_after' );
+	$html_before_value = $values ? esc_attr( $values['html_before'] ) : '';
+	$html_after_value  = $values ? esc_attr( $values['html_after'] ) : '';
+
+	?>
+	<div class="fms-form-rows">
+		<label><?php esc_html_e( 'HTML Before', 'fvb' ); ?></label>
+		<textarea name="<?php echo esc_attr( $html_before_name ); ?>" class="smallipopInput"
+		          title="<?php esc_attr_e( 'Add additional HTML that will be before the default field HTML that will be produced using the Views Builder add-on.', 'fvb' ); ?>"><?php echo $html_before_value; ?></textarea>
+	</div> <!-- .fms-form-rows -->
+	<div class="fms-form-rows">
+		<label><?php esc_html_e( 'HTML After', 'fvb' ); ?></label>
+		<textarea name="<?php echo esc_attr( $html_after_name ); ?>" class="smallipopInput"
+		          title="<?php esc_attr_e( 'Add additional HTML that will be after the default field HTML that will be produced using the Views Builder add-on.', 'fvb' ); ?>"><?php echo $html_after_value; ?></textarea>
+	</div> <!-- .fms-form-rows -->
+	<?php
+}
+
+add_action( 'fms_after_common_fields', 'fvb_after_common_fields', 10, 3 );
+
+function fvb_wrap_field( $html, $field, $value, $view_settings ) {
+	global $fvb_form_id;
+
+	$fms_fields_setting = get_post_meta( $fvb_form_id, 'fms_form', true );
+
+	$html_before = '';
+	$html_after  = '';
+
+	foreach ( $fms_fields_setting as $field_setting ) {
+		if ( $field['name'] != $field_setting['name'] ) {
+			continue;
+		}
+
+		$html_before = $field_setting['html_before'];
+		$html_after  = $field_setting['html_after'];
+	}
+
+	return $html_before . $html . $html_after;
+}
+
+add_filter( 'fvb_field_html', 'fvb_wrap_field', 10, 4 );

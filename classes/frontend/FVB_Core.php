@@ -22,6 +22,9 @@ class FVB_Core {
 			return $content;
 		}
 
+		global $fvb_form_id;
+		$fvb_form_id = $form_id;
+
 		//get the post from the meta key
 		$args = array(
 			'post_type'  => 'fvb_views',
