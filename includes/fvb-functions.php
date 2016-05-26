@@ -96,9 +96,7 @@ function fvb_after_common_fields( $field_id, $label, $values ) {
 add_action( 'fms_after_common_fields', 'fvb_after_common_fields', 10, 3 );
 
 function fvb_wrap_field( $html, $field, $value, $view_settings ) {
-	global $fvb_form_id;
-
-	$fms_fields_setting = get_post_meta( $fvb_form_id, 'fms_form', true );
+	global $fvb_form_id, $fms_fields_setting;
 
 	$html_before = '';
 	$html_after  = '';
@@ -116,3 +114,44 @@ function fvb_wrap_field( $html, $field, $value, $view_settings ) {
 }
 
 add_filter( 'fvb_field_html', 'fvb_wrap_field', 10, 4 );
+
+function fvb_field_conditional_logic_validation( $status, $field, $view_settings ) {
+	global $fms_fields_setting, $fvb_post_meta;
+
+	$form_field_data = array();
+
+	foreach ( $fms_fields_setting as $item ) {
+		if ( $item['name'] == $field['name'] ) {
+			$form_field_data = $item;
+			break;
+		}
+	}
+
+	if ( $form_field_data['condition_status'] != 'yes' ) {
+		return $status;
+	}
+
+	$new_post_meta = array();
+
+	foreach ( $fvb_post_meta as $key => $meta ) {
+		$meta  = is_serialized( $meta ) ? unserialize( $meta ) : $meta;
+		$label = '';
+
+		foreach ( $fms_fields_setting as $item ) {
+			if ( $item['name'] == $key ) {
+				$label = $item['label'];
+				break;
+			}
+		}
+
+		$new_post_meta[ $label ] = $meta;
+	}
+
+	if ( ! empty( $form_field_data ) && ! fms_is_field_visible( $form_field_data, $new_post_meta ) ) {
+		return false;
+	}
+
+	return $status;
+}
+
+add_filter( 'fvb_is_valid_field', 'fvb_field_conditional_logic_validation', 10, 3 );

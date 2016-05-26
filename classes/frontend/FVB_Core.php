@@ -22,7 +22,7 @@ class FVB_Core {
 			return $content;
 		}
 
-		global $fvb_form_id;
+		global $fvb_form_id, $fms_fields_setting;
 		$fvb_form_id = $form_id;
 
 		//get the post from the meta key
@@ -44,7 +44,8 @@ class FVB_Core {
 			return $content;
 		}
 
-		$view_settings = get_post_meta( $view_id, 'fvb_settings', true );
+		$view_settings      = get_post_meta( $view_id, 'fvb_settings', true );
+		$fms_fields_setting = get_post_meta( $fvb_form_id, 'fms_form', true );
 
 		if ( $view_settings['restrict'] == 'yes' && ! FVB_CanAccess( $view_settings ) ) {
 			$wrapper_class = empty( $view_settings['wrapper_class'] ) ? '' : $view_settings['wrapper_class'] . ' ';
@@ -77,8 +78,9 @@ class FVB_Core {
 			$html .= '</div>';
 		}
 
-		global $fvb_from;
-		$fvb_from = '';
+		global $fvb_from, $fvb_post_meta, $post;
+		$fvb_from      = '';
+		$fvb_post_meta = get_post_meta( $post->ID );
 
 		if ( is_array( $view_settings['fields'] ) ) {
 			foreach ( $view_settings['fields'] as $field ) {
@@ -96,9 +98,8 @@ class FVB_Core {
 
 		$field = apply_filters( 'fvb_field', $field, $view_settings );
 
-		global $post;
+		global $fvb_post_meta;
 		$html = '';
-
 
 		$text_fields   = array(
 			'text_field',
@@ -113,8 +114,12 @@ class FVB_Core {
 		$media_fields  = array( 'image_upload', 'file_upload' );
 		$custom_fields = array( 'radio_field', 'dropdown_field', 'multiple_select', 'checkbox_field', 'repeat_field' );
 
+		$value = fms_get_post_meta_value( $fvb_post_meta, $field['name'] );
+		$value = is_serialized( $value ) ? unserialize( $value ) : $value;
 
-		$value = get_post_meta( $post->ID, $field['name'], true );
+		if ( ! apply_filters( 'fvb_is_valid_field', true, $field, $view_settings ) ) {
+			return $html;
+		}
 
 		if ( in_array( $field['template'], $text_fields ) || ( in_array( $field['template'], $custom_fields ) ) ) {
 
