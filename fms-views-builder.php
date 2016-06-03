@@ -6,13 +6,13 @@ if ( ! defined( 'ABSPATH' ) ) {
   Plugin Name: Forms Management System Views Builder
   Plugin URI: http://mostasharoon.org
   Description: An easy way to display the custom fields at the frontend.
-  Version: 1.1.2
+  Version: 1.2
   Author: Mohammed Thaer
   Author URI: http://mostasharoon.org
   Text Domain: fvb
  */
 
-define( 'FVB_VERSION', '1.1.2' );
+define( 'FVB_VERSION', '1.2' );
 
 /* ----------------------------------------------------------------------------------- */
 /* 	Includes required files.
@@ -26,7 +26,7 @@ function fvb_fms_checker() {
 
 		return false;
 		//Check if FMS is old
-	} elseif ( version_compare( FMS_VERSION, '1.9', '<' ) ) {
+	} elseif ( version_compare( FMS_VERSION, '2.6', '<' ) ) {
 		add_action( 'admin_notices', 'fvb_old_fms_warning' );
 
 		return false;
@@ -46,7 +46,7 @@ function fvb_no_fms_warning() {
 function fvb_old_fms_warning() {
 	?>
 	<div class="message error">
-		<p><?php printf( __( 'FMS Views Builder is enabled but not effective. It is not compatible with  <a href="%s">FMS</a> versions prior 1.9.', 'fvb' ),
+		<p><?php printf( __( 'FMS Views Builder is enabled but not effective. It is not compatible with  <a href="%s">FMS</a> versions prior 2.6.', 'fvb' ),
 				'https://mostasharoon.org/wordpress/plugins/forms-management-system/' ); ?></p></div>
 	<?php
 }
