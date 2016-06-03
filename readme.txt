@@ -4,7 +4,7 @@ Donate link: http://mostasharoon.org/buy-us-a-coffee/
 Tags: forms management system, visual builder, custom fields, custom post type, form, forms, mostasharoon,views
 Requires at least: 3.5
 Tested up to: 4.5.2
-Stable tag: 1.2
+Stable tag: 1.2.0.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -13,7 +13,7 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 > This Plugin requires [Forms Management System](http://mostasharoon.org/wordpress/plugins/forms-management-system/).
 > We don't give any support to this plugin here, if you need any help please feel free to contact us through our [support page](http://mostasharoon.org/support/).
 
-Forms Management System Views Builder is a free add-on allows you to display the custom fields at the frontend with easiest way possible.
+Forms Management System Views Builder is a free add-on allows you to display the custom fields at the frontend with the easiest way possible.
 
 Features of the plugin include:
 
@@ -23,6 +23,7 @@ Features of the plugin include:
 * Add a wrapper class to styles the custom fields as you want.
 * You can disable the default style.
 * You can put a label for the custom fields section.
+* Add HTML before and HTML after for each field independently.
 
 == Installation ==
 
@@ -38,6 +39,9 @@ Features of the plugin include:
 We don't give any support to this plugin here, if you need any help please feel free to contact us through our [support page](http://mostasharoon.org/support/).
 
 == Changelog ==
+
+= 1.2.0.1 =
+* Enhance: Update readme.txt file
 
 = 1.2 =
 * New: New HTML before and HTML after feature
