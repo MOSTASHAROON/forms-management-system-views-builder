@@ -109,6 +109,7 @@ class FVB_Core {
 			'custom_hidden_field',
 			'date_field',
 			'date_time_field',
+			'slider',
 			'stepper'
 		);
 		$media_fields  = array( 'image_upload', 'file_upload' );
