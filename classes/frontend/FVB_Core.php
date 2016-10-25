@@ -165,6 +165,8 @@ class FVB_Core {
 
 			}
 			$html .= '</p>';
+		} else {
+			$html .= apply_filters( 'fvb_render_'.$field['template'], '', $field, $value, $view_settings );
 		}
 
 		$html = apply_filters( 'fvb_field_html', $html, $field, $value, $view_settings );
