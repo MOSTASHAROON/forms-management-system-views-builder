@@ -408,6 +408,22 @@ class FVB_Views {
 	 */
 	public function get_the_fields_table( $fms_fields_setting, $val = '' ) {
 
+		$correct_fields_order = array();
+		for ($x = 1; $x <= 6; $x++) {
+			foreach ( $fms_fields_setting as $index => $field ) {
+				if( !isset($field['step']) ){
+					$correct_fields_order[$index] = $field;
+					continue;
+				}
+
+				if((int)$field['step']==$x){
+					$correct_fields_order[]=$field;
+				}
+			}
+		}
+
+		$fms_fields_setting = $correct_fields_order;
+
 		$html = '<table class="fvb_fields_table table table-bordered">';
 		$html .= '<thead>';
 		$html .= '<tr>';
