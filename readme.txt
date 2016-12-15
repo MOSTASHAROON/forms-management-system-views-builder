@@ -3,8 +3,8 @@ Contributors: Engr.MTH, MOSTASHAROON
 Donate link: http://mostasharoon.org/buy-us-a-coffee/
 Tags: forms management system, visual builder, custom fields, custom post type, form, forms, mostasharoon,views
 Requires at least: 3.5
-Tested up to: 4.5.2
-Stable tag: 1.2.0.1
+Tested up to: 4.7
+Stable tag: 1.2.0.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -39,6 +39,9 @@ Features of the plugin include:
 We don't give any support to this plugin here, if you need any help please feel free to contact us through our [support page](http://mostasharoon.org/support/).
 
 == Changelog ==
+
+= 1.2.0.2 =
+* Fix: Incorrect fields order issue, caused by the new multi-step form feature.
 
 = 1.2.0.1 =
 * Enhance: Update readme.txt file
