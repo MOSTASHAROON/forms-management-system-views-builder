@@ -112,6 +112,7 @@ class FVB_Core {
 			'slider',
 			'stepper'
 		);
+		$text_fields = apply_filters('fvb_text_fields', $text_fields, $field, $view_settings );
 		$media_fields  = array( 'image_upload', 'file_upload' );
 		$custom_fields = array( 'radio_field', 'dropdown_field', 'multiple_select', 'checkbox_field', 'repeat_field' );
 
