@@ -411,7 +411,7 @@ class FVB_Views {
 		$correct_fields_order = array();
 		for ($x = 1; $x <= 6; $x++) {
 			foreach ( $fms_fields_setting as $index => $field ) {
-				if( !isset($field['step']) ){
+				if( !isset($field['step']) || empty($field['step']) ){
 					$correct_fields_order[$index] = $field;
 					continue;
 				}
